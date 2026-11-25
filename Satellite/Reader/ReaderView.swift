@@ -2,7 +2,7 @@ import SwiftData
 import SwiftUI
 
 enum ReaderSheet: String, Identifiable {
-    case sources, settings, addSource, importFeeds
+    case articles, sources, settings, addSource, importFeeds
     var id: String { rawValue }
 }
 
@@ -66,19 +66,19 @@ struct ReaderView: View {
             }
             .animation(.snappy, value: queue.index)
             Spacer(minLength: 8)
-            BarButton(symbol: "list.bullet", label: "Sources") { sheet = .sources }
+            BarButton(symbol: "list.bullet", label: "All Unread Articles") { sheet = .articles }
         }
         .padding(.horizontal, 6)
         .frame(height: 48)
         .overlay(alignment: .bottom) {
-            ProgressLine(fraction: queue.entries.isEmpty ? 1 : Double(min(queue.index + 1, queue.entries.count)) / Double(queue.entries.count))
+            ProgressLine(fraction: queue.progress)
         }
     }
 
     private var position: String {
         if queue.isRefreshing && queue.isAtEnd { return "Checking for new articles…" }
-        if queue.isAtEnd { return queue.entries.isEmpty ? "Nothing unread" : "All caught up" }
-        return "\(queue.index + 1) of \(queue.entries.count)"
+        if queue.isAtEnd { return "All caught up" }
+        return "\(queue.remaining) left"
     }
 }
 
@@ -181,10 +181,10 @@ struct CaughtUpView: View {
             Text("All Caught Up")
                 .font(.title2.bold())
             Group {
-                if queue.entries.isEmpty {
+                if queue.readThisRun == 0 {
                     Text("Nothing new from your ^[\(sourceCount) source](inflect: true) in the last \(ReadingQueue.windowDays) days.")
                 } else {
-                    Text("That's everything new from your ^[\(sourceCount) source](inflect: true). Swipe back to reread.")
+                    Text("That's everything new from your ^[\(sourceCount) source](inflect: true).")
                 }
             }
             .font(.callout)

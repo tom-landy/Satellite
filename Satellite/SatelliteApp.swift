@@ -50,6 +50,7 @@ struct RootView: View {
         ReaderView(sheet: $sheet)
             .sheet(item: $sheet) { sheet in
                 switch sheet {
+                case .articles: ArticleListView()
                 case .sources: SourcesView()
                 case .settings: SettingsView()
                 case .addSource: AddSourceView()

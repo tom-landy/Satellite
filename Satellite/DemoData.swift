@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 /// Sample sources and articles for screenshots and trying the app without a network.
-/// Launch with -demo. Also: -demoSheet sources|settings|addSource, -demoIndex 2, -demoWelcome YES, -demoEnd YES.
+/// Launch with -demo. Also: -demoSheet articles|sources|settings|addSource, -demoIndex 2, -demoWelcome YES, -demoEnd YES.
 @MainActor
 enum DemoData {
     nonisolated static var isActive: Bool { ProcessInfo.processInfo.arguments.contains("-demo") }

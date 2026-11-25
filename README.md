@@ -6,8 +6,10 @@ Screenshots appear in `docs/screenshots` after running Actions → iOS build →
 
 ## What it does
 
-- One screen. The newest unread article fills it; swipe left for the next, right to go back.
-  Articles are marked read as they're shown and stay in the run, so swiping back always works.
+- One screen. The newest unread article fills it; swipe left for the next. An article is marked
+  read when it's shown and disappears once you swipe past it, unless you mark it unread.
+- The list button shows every unread article on one line each: tap to jump to it, swipe to mark
+  it read or save it. Mark All as Read is there and in Settings.
 - Only the last 7 days count as unread (3, 7, 14 or 30 in Settings). Older articles drop out
   without being marked read, so time away never leaves a pile.
 - New articles found while you read go straight after the one on screen. Back after half an

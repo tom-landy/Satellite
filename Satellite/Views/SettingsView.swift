@@ -11,6 +11,8 @@ struct SettingsView: View {
     @Environment(ReadingQueue.self) private var queue
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
+    @Query(filter: #Predicate<Article> { $0.readAt == nil }) private var unread: [Article]
+    @State private var confirmMarkAll = false
 
     private let columns = [GridItem(.adaptive(minimum: 58), spacing: 14)]
 
@@ -78,6 +80,19 @@ struct SettingsView: View {
                     }
                 } footer: {
                     Text("Older articles drop out of the reader without being marked read, so time away never leaves a pile.")
+                }
+
+                Section {
+                    Button("Mark All as Read") { confirmMarkAll = true }
+                        .disabled(unread.isEmpty)
+                        .confirmationDialog("Mark ^[\(unread.count) article](inflect: true) as read?",
+                                            isPresented: $confirmMarkAll, titleVisibility: .visible) {
+                            Button("Mark All as Read", role: .destructive) { queue.markAllRead(context) }
+                        } message: {
+                            Text("Every unread article disappears from the reader. Saved articles stay in Saved.")
+                        }
+                } footer: {
+                    Text("Read articles disappear as you swipe past them. Mark one unread to keep it.")
                 }
 
                 Section("About") {
