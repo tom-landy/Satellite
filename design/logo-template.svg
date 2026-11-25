@@ -15,10 +15,9 @@
   </defs>
   <rect width="1024" height="1024" fill="url(#bg)"/>
   <rect width="1024" height="1024" fill="url(#glow)"/>
-  <!-- Orbit's satellite, sending: the feed symbol in Orbit's stroke weight (92) and round caps.
-       Satellite at (296, 728); arcs of radius 250 and 466 from straight up to straight right.
-       Same bounding box as Orbit's ring (216 to 808). -->
-  <path d="M 296 478 A 250 250 0 0 1 546 728" fill="none" stroke="url(#fg)" stroke-width="92" stroke-linecap="round"/>
-  <path d="M 296 262 A 466 466 0 0 1 762 728" fill="none" stroke="url(#fg)" stroke-width="92" stroke-linecap="round"/>
-  <circle cx="296" cy="728" r="80" fill="url(#fg)"/>
+  <!-- The dish: Orbit's ring (centre 512, r 250, stroke 92) with only the half opposite its gap,
+       an arm, and the feed dot exactly where Orbit's satellite sits (689, 335, r 58). -->
+  <path d="M 688.8 688.8 A 250 250 0 0 1 335.2 335.2" fill="none" stroke="url(#fg)" stroke-width="92" stroke-linecap="round"/>
+  <path d="M 512 512 L 650.6 373.4" fill="none" stroke="url(#fg)" stroke-width="44" stroke-linecap="round"/>
+  <circle cx="689" cy="335" r="58" fill="url(#fg)"/>
 </svg>

@@ -23,6 +23,10 @@ Screenshots appear in `docs/screenshots` after running Actions → iOS build →
 - Orbit's ten colour themes and appearance choice, with matching app icons; San Francisco or
   New York for article text, at eight sizes on top of the iOS text size.
 
+The mark is a dish made from Orbit's own ring: the half opposite Orbit's gap, with the feed dot
+exactly where Orbit's satellite sits. All ten themes: `design/icon-themes.png`. The options that
+were considered are in `design/logo-options/`.
+
 Not built yet: a share extension ("Follow in Satellite" from Safari), search, folders, Spotlight, iPad layout tuning.
 
 ## Run on your Mac
@@ -34,7 +38,7 @@ Not built yet: a share extension ("Follow in Satellite" from Safari), search, fo
 Pick an iPhone simulator in the toolbar and press Cmd+R. To see the app full of sample articles,
 Product → Scheme → Edit Scheme → Run → Arguments, and add `-demo`.
 
-Running on your iPhone is the same as Orbit (see Orbit's docs/DEPLOYING.md). The bundle ID is
+Running on your iPhone and TestFlight: [docs/DEPLOYING.md](docs/DEPLOYING.md). The bundle ID is
 `com.warhound.satellite`, set once as `SATELLITE_BUNDLE_ID` in the project's build settings.
 
 ## Layout
@@ -71,3 +75,4 @@ Version: shown in Settings → About. Run `tools/bump-version.sh` before committ
 
 `.github/workflows/ios.yml` runs the feed tests and builds for the simulator on every push.
 Running it by hand can also take screenshots and commit them to `docs/screenshots`.
+`.github/workflows/testflight.yml` archives, signs and uploads to TestFlight (run by hand).

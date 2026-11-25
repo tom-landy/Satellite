@@ -1,0 +1,99 @@
+name: TestFlight
+
+# One click: Actions → TestFlight → Run workflow. Builds a Release archive, signs it with
+# Xcode's automatic (cloud) signing using an App Store Connect API key, and uploads it.
+# Needs four repo secrets (Settings → Secrets and variables → Actions); see docs/DEPLOYING.md:
+#   ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8 (the .p8 file's text), TEAM_ID (optional: the project's team is the default)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: testflight
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+      TEAM_ID: ${{ secrets.TEAM_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets
+        run: |
+          missing=""
+          [ -n "$ASC_KEY_ID" ] || missing="$missing ASC_KEY_ID"
+          [ -n "$ASC_ISSUER_ID" ] || missing="$missing ASC_ISSUER_ID"
+          [ -n "$ASC_KEY_P8" ] || missing="$missing ASC_KEY_P8"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repo secrets:$missing. See docs/DEPLOYING.md, step 3."
+            exit 1
+          fi
+      - name: Feed tests
+        run: |
+          swiftc Satellite/FeedKit/*.swift tools/feedtest/main.swift -o /tmp/feedtest
+          /tmp/feedtest tools/feedtest/fixtures
+      - name: API key and version
+        run: |
+          mkdir -p "$RUNNER_TEMP/keys"
+          printf '%s\n' "$ASC_KEY_P8" > "$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8"
+          if [ -z "$TEAM_ID" ]; then
+            TEAM_ID=$(grep -m1 -o 'DEVELOPMENT_TEAM = [A-Z0-9]*' Satellite.xcodeproj/project.pbxproj | awk '{print $3}')
+          fi
+          VERSION=$(grep -m1 -o 'MARKETING_VERSION = [0-9.]*' Satellite.xcodeproj/project.pbxproj | awk '{print $3}')
+          # Build number: the version's step, then this workflow's run number (0.3 run 12 -> 3.12),
+          # so every upload is unique and still says which version it belongs to.
+          BUILD="${VERSION#0.}.${GITHUB_RUN_NUMBER}"
+          echo "TEAM_ID=$TEAM_ID" >> "$GITHUB_ENV"
+          echo "BUILD=$BUILD" >> "$GITHUB_ENV"
+          echo "Satellite $VERSION ($BUILD), team $TEAM_ID"
+      - name: Archive
+        run: |
+          xcodebuild archive \
+            -project Satellite.xcodeproj \
+            -scheme Satellite \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/Satellite.xcarchive" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8" \
+            -authenticationKeyID "$ASC_KEY_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
+            DEVELOPMENT_TEAM="$TEAM_ID" \
+            CODE_SIGN_STYLE=Automatic \
+            CURRENT_PROJECT_VERSION="$BUILD" > archive.log 2>&1 || { grep -E "error:|warning: .*Satellite/" archive.log; tail -40 archive.log; exit 1; }
+          grep -E "ARCHIVE SUCCEEDED" archive.log
+      - name: Upload to App Store Connect
+        run: |
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<PLIST
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>upload</string>
+            <key>teamID</key><string>$TEAM_ID</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>uploadSymbols</key><true/>
+            <key>manageAppVersionAndBuildNumber</key><false/>
+          </dict>
+          </plist>
+          PLIST
+          xcodebuild -exportArchive \
+            -archivePath "$RUNNER_TEMP/Satellite.xcarchive" \
+            -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -exportPath "$RUNNER_TEMP/export" \
+            -allowProvisioningUpdates \
+            -authenticationKeyPath "$RUNNER_TEMP/keys/AuthKey_$ASC_KEY_ID.p8" \
+            -authenticationKeyID "$ASC_KEY_ID" \
+            -authenticationKeyIssuerID "$ASC_ISSUER_ID"
+          echo "Uploaded build $BUILD. It appears in App Store Connect → TestFlight once Apple has processed it (usually 10-30 minutes)."
+      - name: Remove key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/keys"

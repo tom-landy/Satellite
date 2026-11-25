@@ -131,8 +131,8 @@ extension EnvironmentValues {
 }
 
 /// The Satellite mark drawn natively, so it takes the current theme colour.
-/// Geometry matches design/logo-template.svg on a 1024 grid: Orbit's satellite, sending.
-/// The dot and two arcs are the feed symbol, drawn with Orbit's stroke weight and round caps.
+/// Geometry matches design/logo-template.svg on a 1024 grid: a dish made from Orbit's ring
+/// (the half opposite its gap), with the feed exactly where Orbit's satellite sits.
 struct LogoView: View {
     var theme: AccentTheme
     var showsBackground = true
@@ -146,30 +146,37 @@ struct LogoView: View {
                     RadialGradient(colors: [theme.bottom.opacity(0.22), .clear], center: .center,
                                    startRadius: 0, endRadius: 512 * s)
                 }
-                Self.mark(scale: s).fill(theme.gradient)
+                // Filled one part at a time, so where the arm meets the dot never cancels out.
+                ForEach(Array(Self.parts(scale: s).enumerated()), id: \.offset) { _, part in
+                    part.fill(theme.gradient)
+                }
             }
         }
         .aspectRatio(1, contentMode: .fit)
         .accessibilityHidden(true)
     }
 
-    /// Satellite at (296, 728); arcs of radius 250 and 466 sweep from straight up to straight right.
-    static func mark(scale s: CGFloat) -> Path {
-        let cx = 296.0, cy = 728.0
-        func arc(_ r: Double) -> Path {
-            var path = Path()
-            let steps = 60
-            for i in 0...steps {
-                let a = (-90 + 90 * Double(i) / Double(steps)) * .pi / 180
-                let point = CGPoint(x: (cx + r * cos(a)) * s, y: (cy + r * sin(a)) * s)
-                if i == 0 { path.move(to: point) } else { path.addLine(to: point) }
-            }
-            return path
+    /// Half of Orbit's ring (centre 512, radius 250) from 45° to 225°, an arm towards -45°,
+    /// and the feed dot at (689, 335), radius 58: the same spot as Orbit's satellite.
+    static func parts(scale s: CGFloat) -> [Path] {
+        let c = 512.0, r = 250.0
+        func point(_ radius: Double, _ degrees: Double) -> CGPoint {
+            let a = degrees * .pi / 180
+            return CGPoint(x: (c + radius * cos(a)) * s, y: (c + radius * sin(a)) * s)
         }
-        let style = StrokeStyle(lineWidth: 92 * s, lineCap: .round, lineJoin: .round)
-        var shape = arc(250).strokedPath(style)
-        shape.addPath(arc(466).strokedPath(style))
-        shape.addEllipse(in: CGRect(x: (cx - 80) * s, y: (cy - 80) * s, width: 160 * s, height: 160 * s))
-        return shape
+        var dish = Path()
+        let steps = 90
+        for i in 0...steps {
+            let p = point(r, 45 + 180 * Double(i) / Double(steps))
+            if i == 0 { dish.move(to: p) } else { dish.addLine(to: p) }
+        }
+        var arm = Path()
+        arm.move(to: point(0, 0))
+        arm.addLine(to: point(196, -45))
+        return [
+            dish.strokedPath(StrokeStyle(lineWidth: 92 * s, lineCap: .round, lineJoin: .round)),
+            arm.strokedPath(StrokeStyle(lineWidth: 44 * s, lineCap: .round)),
+            Path(ellipseIn: CGRect(x: (689 - 58) * s, y: (335 - 58) * s, width: 116 * s, height: 116 * s)),
+        ]
     }
 }
