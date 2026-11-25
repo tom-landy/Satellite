@@ -5,7 +5,7 @@ import SwiftData
 /// Launch with -demo. Also: -demoSheet sources|settings|addSource, -demoIndex 2, -demoWelcome YES, -demoEnd YES.
 @MainActor
 enum DemoData {
-    nonisolated static var isActive: Bool { UserDefaults.standard.bool(forKey: "demo") }
+    nonisolated static var isActive: Bool { ProcessInfo.processInfo.arguments.contains("-demo") }
     nonisolated static var showsWelcome: Bool { isActive && UserDefaults.standard.bool(forKey: "demoWelcome") }
 
     private struct Post {
