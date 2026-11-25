@@ -1,0 +1,388 @@
+<!doctype html><html><head><style>
+  body{margin:0;padding:28px;background:#f2f2f7;font:15px -apple-system,system-ui,Helvetica,sans-serif;color:#1c1c1e}
+  h1{font-size:20px;margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(4,250px);gap:26px}
+  .cell svg{display:block;width:100%;height:100%}
+  .big{width:200px;height:200px;border-radius:45px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+  .row{display:flex;gap:10px;margin:12px 0 8px}
+  .small{width:60px;height:60px;border-radius:14px;overflow:hidden}
+  .small.dim{width:40px;height:40px;border-radius:9px;align-self:flex-end}
+  .name{font-size:15px}.note{color:#6c6c70;font-size:13px;line-height:1.35;margin-top:2px;width:230px}
+  .ref .big{outline:3px solid #F26A2A;outline-offset:4px}
+</style></head><body><h1>Satellite mark options (blue), beside Orbit</h1><div class="grid">
+<div class="cell ref"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23262D"/>
+      <stop offset="1" stop-color="#0C0D10"/>
+    </linearGradient>
+    <linearGradient id="fg1" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808">
+      <stop offset="0" stop-color="#FFB25C"/>
+      <stop offset="1" stop-color="#F2551D"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F2551D" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#F2551D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg1)"/>
+  <rect width="1024" height="1024" fill="url(#glow1)"/>
+  <!-- Ring: r=250 centred, gap of 68deg around the satellite at -45deg (upper right) -->
+  <path d="M 559.7 266.6 A 250 250 0 1 0 757.4 464.3" fill="none" stroke="url(#fg1)" stroke-width="92" stroke-linecap="round"/>
+  <!-- Satellite -->
+  <circle cx="689" cy="335" r="58" fill="url(#fg1)"/>
+  <!-- Core -->
+  <circle cx="512" cy="512" r="74" fill="url(#fg1)" opacity="0.9"/>
+</svg>
+</div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23262D"/>
+      <stop offset="1" stop-color="#0C0D10"/>
+    </linearGradient>
+    <linearGradient id="fg2" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808">
+      <stop offset="0" stop-color="#FFB25C"/>
+      <stop offset="1" stop-color="#F2551D"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F2551D" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#F2551D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg2)"/>
+  <rect width="1024" height="1024" fill="url(#glow2)"/>
+  <!-- Ring: r=250 centred, gap of 68deg around the satellite at -45deg (upper right) -->
+  <path d="M 559.7 266.6 A 250 250 0 1 0 757.4 464.3" fill="none" stroke="url(#fg2)" stroke-width="92" stroke-linecap="round"/>
+  <!-- Satellite -->
+  <circle cx="689" cy="335" r="58" fill="url(#fg2)"/>
+  <!-- Core -->
+  <circle cx="512" cy="512" r="74" fill="url(#fg2)" opacity="0.9"/>
+</svg>
+</div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23262D"/>
+      <stop offset="1" stop-color="#0C0D10"/>
+    </linearGradient>
+    <linearGradient id="fg3" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808">
+      <stop offset="0" stop-color="#FFB25C"/>
+      <stop offset="1" stop-color="#F2551D"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F2551D" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#F2551D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg3)"/>
+  <rect width="1024" height="1024" fill="url(#glow3)"/>
+  <!-- Ring: r=250 centred, gap of 68deg around the satellite at -45deg (upper right) -->
+  <path d="M 559.7 266.6 A 250 250 0 1 0 757.4 464.3" fill="none" stroke="url(#fg3)" stroke-width="92" stroke-linecap="round"/>
+  <!-- Satellite -->
+  <circle cx="689" cy="335" r="58" fill="url(#fg3)"/>
+  <!-- Core -->
+  <circle cx="512" cy="512" r="74" fill="url(#fg3)" opacity="0.9"/>
+</svg>
+</div></div>
+  <div class="name"><b></b> Orbit (for reference)</div><div class="note">The existing family mark.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg4" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow4" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg4)"/><rect width="1024" height="1024" fill="url(#glow4)"/>
+    <mask id="sp-4" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="610" cy="410" r="176" fill="black"/></mask>
+    <g fill="none" stroke="url(#fg4)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#sp-4)"><path d="M 600 430 L 340 790"/><path d="M 600 430 L 250 700"/><path d="M 600 430 L 215 585"/></g>
+    <circle cx="610" cy="410" r="150" fill="url(#fg4)"/></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg5" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow5" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg5)"/><rect width="1024" height="1024" fill="url(#glow5)"/>
+    <mask id="sp-5" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="610" cy="410" r="176" fill="black"/></mask>
+    <g fill="none" stroke="url(#fg5)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#sp-5)"><path d="M 600 430 L 340 790"/><path d="M 600 430 L 250 700"/><path d="M 600 430 L 215 585"/></g>
+    <circle cx="610" cy="410" r="150" fill="url(#fg5)"/></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg6" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow6" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg6)"/><rect width="1024" height="1024" fill="url(#glow6)"/>
+    <mask id="sp-6" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="610" cy="410" r="176" fill="black"/></mask>
+    <g fill="none" stroke="url(#fg6)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#sp-6)"><path d="M 600 430 L 340 790"/><path d="M 600 430 L 250 700"/><path d="M 600 430 L 215 585"/></g>
+    <circle cx="610" cy="410" r="150" fill="url(#fg6)"/></svg></div></div>
+  <div class="name"><b>1</b> Sputnik</div><div class="note">The first satellite: a sphere trailing antennae.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg7" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg7" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow7" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg7)"/><rect width="1024" height="1024" fill="url(#glow7)"/>
+    <g transform="rotate(-35 512 512)" fill="url(#fg7)">
+      <rect x="432" y="432" width="160" height="160" rx="36"/>
+      <rect x="300" y="496" width="140" height="32" rx="16"/><rect x="584" y="496" width="140" height="32" rx="16"/>
+      <rect x="168" y="352" width="138" height="146" rx="22"/><rect x="168" y="526" width="138" height="146" rx="22"/>
+      <rect x="718" y="352" width="138" height="146" rx="22"/><rect x="718" y="526" width="138" height="146" rx="22"/>
+    </g></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg8" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg8" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow8" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg8)"/><rect width="1024" height="1024" fill="url(#glow8)"/>
+    <g transform="rotate(-35 512 512)" fill="url(#fg8)">
+      <rect x="432" y="432" width="160" height="160" rx="36"/>
+      <rect x="300" y="496" width="140" height="32" rx="16"/><rect x="584" y="496" width="140" height="32" rx="16"/>
+      <rect x="168" y="352" width="138" height="146" rx="22"/><rect x="168" y="526" width="138" height="146" rx="22"/>
+      <rect x="718" y="352" width="138" height="146" rx="22"/><rect x="718" y="526" width="138" height="146" rx="22"/>
+    </g></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg9" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg9" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow9" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg9)"/><rect width="1024" height="1024" fill="url(#glow9)"/>
+    <g transform="rotate(-35 512 512)" fill="url(#fg9)">
+      <rect x="432" y="432" width="160" height="160" rx="36"/>
+      <rect x="300" y="496" width="140" height="32" rx="16"/><rect x="584" y="496" width="140" height="32" rx="16"/>
+      <rect x="168" y="352" width="138" height="146" rx="22"/><rect x="168" y="526" width="138" height="146" rx="22"/>
+      <rect x="718" y="352" width="138" height="146" rx="22"/><rect x="718" y="526" width="138" height="146" rx="22"/>
+    </g></svg></div></div>
+  <div class="name"><b>2</b> Solar panels</div><div class="note">The satellite everyone draws: body and two panel wings.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg10" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg10" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow10" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg10)"/><rect width="1024" height="1024" fill="url(#glow10)"/><g transform="rotate(-28 512 512) translate(512 512)">
+    <mask id="tb-10" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="140" fill="black"/></mask>
+    <mask id="tc-10" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="black" stroke-width="110" stroke-linecap="round"/></mask>
+    <mask id="tf-10" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="275.1" cy="77.6" r="82" fill="black"/></mask>
+    <path d="M -340 0 A 340 132 0 0 1 340 0" fill="none" stroke="url(#fg10)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tb-10)"/>
+    <circle r="112" fill="url(#fg10)" mask="url(#tc-10)"/>
+    <path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="url(#fg10)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tf-10)"/>
+    <circle cx="275.1" cy="77.6" r="58" fill="url(#fg10)"/></g></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg11" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg11" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow11" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg11)"/><rect width="1024" height="1024" fill="url(#glow11)"/><g transform="rotate(-28 512 512) translate(512 512)">
+    <mask id="tb-11" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="140" fill="black"/></mask>
+    <mask id="tc-11" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="black" stroke-width="110" stroke-linecap="round"/></mask>
+    <mask id="tf-11" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="275.1" cy="77.6" r="82" fill="black"/></mask>
+    <path d="M -340 0 A 340 132 0 0 1 340 0" fill="none" stroke="url(#fg11)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tb-11)"/>
+    <circle r="112" fill="url(#fg11)" mask="url(#tc-11)"/>
+    <path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="url(#fg11)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tf-11)"/>
+    <circle cx="275.1" cy="77.6" r="58" fill="url(#fg11)"/></g></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg12" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg12" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow12" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg12)"/><rect width="1024" height="1024" fill="url(#glow12)"/><g transform="rotate(-28 512 512) translate(512 512)">
+    <mask id="tb-12" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="140" fill="black"/></mask>
+    <mask id="tc-12" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="black" stroke-width="110" stroke-linecap="round"/></mask>
+    <mask id="tf-12" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="275.1" cy="77.6" r="82" fill="black"/></mask>
+    <path d="M -340 0 A 340 132 0 0 1 340 0" fill="none" stroke="url(#fg12)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tb-12)"/>
+    <circle r="112" fill="url(#fg12)" mask="url(#tc-12)"/>
+    <path d="M -340 0 A 340 132 0 0 0 340 0" fill="none" stroke="url(#fg12)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" mask="url(#tf-12)"/>
+    <circle cx="275.1" cy="77.6" r="58" fill="url(#fg12)"/></g></svg></div></div>
+  <div class="name"><b>3</b> Tilted orbit</div><div class="note">Orbit's ring tipped into 3D, a satellite riding the front.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg13" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg13" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow13" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg13)"/><rect width="1024" height="1024" fill="url(#glow13)"/>
+    <path d="M -150.3,750 A 520 520 0 0 1 812.1,919.7" fill="none" stroke="url(#fg13)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M -70.9,416.4 A 700 700 0 0 1 628.6,391.9" fill="none" stroke="url(#fg13)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 62"/>
+    <circle cx="750" cy="473.8" r="70" fill="url(#fg13)"/></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg14" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg14" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow14" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg14)"/><rect width="1024" height="1024" fill="url(#glow14)"/>
+    <path d="M -150.3,750 A 520 520 0 0 1 812.1,919.7" fill="none" stroke="url(#fg14)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M -70.9,416.4 A 700 700 0 0 1 628.6,391.9" fill="none" stroke="url(#fg14)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 62"/>
+    <circle cx="750" cy="473.8" r="70" fill="url(#fg14)"/></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg15" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg15" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow15" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg15)"/><rect width="1024" height="1024" fill="url(#glow15)"/>
+    <path d="M -150.3,750 A 520 520 0 0 1 812.1,919.7" fill="none" stroke="url(#fg15)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M -70.9,416.4 A 700 700 0 0 1 628.6,391.9" fill="none" stroke="url(#fg15)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 62"/>
+    <circle cx="750" cy="473.8" r="70" fill="url(#fg15)"/></svg></div></div>
+  <div class="name"><b>4</b> Horizon</div><div class="note">The planet's edge, and a satellite climbing over it.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg16" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg16" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow16" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg16)"/><rect width="1024" height="1024" fill="url(#glow16)"/><g transform="rotate(-20 512 512) translate(512 512)"><mask id="po-16" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="black" stroke-width="96" stroke-linecap="round"/><circle cx="330" cy="40" r="80" fill="black"/></mask></g>
+    <g mask="url(#po-16)">
+      <rect x="352" y="282" width="320" height="420" rx="56" fill="none" stroke="url(#fg16)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#fg16)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"><path d="M 436 400 H 588"/><path d="M 436 490 H 588"/><path d="M 436 580 H 530"/></g>
+    </g>
+    <g transform="rotate(-20 512 512) translate(512 512)">
+      <mask id="pa-16" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="330" cy="40" r="80" fill="black"/></mask>
+      <path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="url(#fg16)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#pa-16)"/>
+      <circle cx="330" cy="40" r="56" fill="url(#fg16)"/>
+    </g></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg17" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg17" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow17" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg17)"/><rect width="1024" height="1024" fill="url(#glow17)"/><g transform="rotate(-20 512 512) translate(512 512)"><mask id="po-17" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="black" stroke-width="96" stroke-linecap="round"/><circle cx="330" cy="40" r="80" fill="black"/></mask></g>
+    <g mask="url(#po-17)">
+      <rect x="352" y="282" width="320" height="420" rx="56" fill="none" stroke="url(#fg17)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#fg17)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"><path d="M 436 400 H 588"/><path d="M 436 490 H 588"/><path d="M 436 580 H 530"/></g>
+    </g>
+    <g transform="rotate(-20 512 512) translate(512 512)">
+      <mask id="pa-17" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="330" cy="40" r="80" fill="black"/></mask>
+      <path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="url(#fg17)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#pa-17)"/>
+      <circle cx="330" cy="40" r="56" fill="url(#fg17)"/>
+    </g></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg18" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg18" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow18" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg18)"/><rect width="1024" height="1024" fill="url(#glow18)"/><g transform="rotate(-20 512 512) translate(512 512)"><mask id="po-18" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="black" stroke-width="96" stroke-linecap="round"/><circle cx="330" cy="40" r="80" fill="black"/></mask></g>
+    <g mask="url(#po-18)">
+      <rect x="352" y="282" width="320" height="420" rx="56" fill="none" stroke="url(#fg18)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+      <g fill="none" stroke="url(#fg18)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"><path d="M 436 400 H 588"/><path d="M 436 490 H 588"/><path d="M 436 580 H 530"/></g>
+    </g>
+    <g transform="rotate(-20 512 512) translate(512 512)">
+      <mask id="pa-18" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="330" cy="40" r="80" fill="black"/></mask>
+      <path d="M -330 40 A 330 120 0 0 0 330 40" fill="none" stroke="url(#fg18)" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" mask="url(#pa-18)"/>
+      <circle cx="330" cy="40" r="56" fill="url(#fg18)"/>
+    </g></svg></div></div>
+  <div class="name"><b>5</b> Page in orbit</div><div class="note">An article with a satellite circling it.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg19" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg19" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow19" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg19)"/><rect width="1024" height="1024" fill="url(#glow19)"/>
+    <path d="M 660.9,750.9 A 270 270 0 0 1 279.1,369.1" fill="none" stroke="url(#fg19)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 470 560 L 650 380" fill="none" stroke="url(#fg19)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="676" cy="354" r="64" fill="url(#fg19)"/></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg20" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg20" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow20" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg20)"/><rect width="1024" height="1024" fill="url(#glow20)"/>
+    <path d="M 660.9,750.9 A 270 270 0 0 1 279.1,369.1" fill="none" stroke="url(#fg20)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 470 560 L 650 380" fill="none" stroke="url(#fg20)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="676" cy="354" r="64" fill="url(#fg20)"/></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg21" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg21" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow21" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg21)"/><rect width="1024" height="1024" fill="url(#glow21)"/>
+    <path d="M 660.9,750.9 A 270 270 0 0 1 279.1,369.1" fill="none" stroke="url(#fg21)" stroke-width="92" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 470 560 L 650 380" fill="none" stroke="url(#fg21)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="676" cy="354" r="64" fill="url(#fg21)"/></svg></div></div>
+  <div class="name"><b>6</b> Dish</div><div class="note">Receiving: a dish catching what the satellites send.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg22" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg22" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow22" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg22)"/><rect width="1024" height="1024" fill="url(#glow22)"/>
+    <path d="M 577,269.4 A 130 130 0 1 0 512 512 A 130 130 0 1 1 447,754.6" fill="none" stroke="url(#fg22)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="639.2" cy="409" r="50" fill="url(#fg22)"/>
+    <circle cx="384.8" cy="615" r="50" fill="url(#fg22)"/></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg23" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg23" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow23" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg23)"/><rect width="1024" height="1024" fill="url(#glow23)"/>
+    <path d="M 577,269.4 A 130 130 0 1 0 512 512 A 130 130 0 1 1 447,754.6" fill="none" stroke="url(#fg23)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="639.2" cy="409" r="50" fill="url(#fg23)"/>
+    <circle cx="384.8" cy="615" r="50" fill="url(#fg23)"/></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg24" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg24" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow24" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg24)"/><rect width="1024" height="1024" fill="url(#glow24)"/>
+    <path d="M 577,269.4 A 130 130 0 1 0 512 512 A 130 130 0 1 1 447,754.6" fill="none" stroke="url(#fg24)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="639.2" cy="409" r="50" fill="url(#fg24)"/>
+    <circle cx="384.8" cy="615" r="50" fill="url(#fg24)"/></svg></div></div>
+  <div class="name"><b>7</b> S orbit</div><div class="note">Two half-orbits make an S, with a satellite at each end.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg25" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg25" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow25" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg25)"/><rect width="1024" height="1024" fill="url(#glow25)"/>
+    <mask id="mo-25" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="600" cy="430" r="250" fill="black"/></mask>
+    <circle cx="470" cy="560" r="270" fill="url(#fg25)" mask="url(#mo-25)"/>
+    <circle cx="700" cy="330" r="62" fill="url(#fg25)"/></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg26" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg26" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow26" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg26)"/><rect width="1024" height="1024" fill="url(#glow26)"/>
+    <mask id="mo-26" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="600" cy="430" r="250" fill="black"/></mask>
+    <circle cx="470" cy="560" r="270" fill="url(#fg26)" mask="url(#mo-26)"/>
+    <circle cx="700" cy="330" r="62" fill="url(#fg26)"/></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg27" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg27" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow27" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg27)"/><rect width="1024" height="1024" fill="url(#glow27)"/>
+    <mask id="mo-27" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle cx="600" cy="430" r="250" fill="black"/></mask>
+    <circle cx="470" cy="560" r="270" fill="url(#fg27)" mask="url(#mo-27)"/>
+    <circle cx="700" cy="330" r="62" fill="url(#fg27)"/></svg></div></div>
+  <div class="name"><b>8</b> Crescent</div><div class="note">A moon and the small satellite sharing its sky.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg28" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg28" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow28" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg28)"/><rect width="1024" height="1024" fill="url(#glow28)"/><g transform="rotate(-22 512 512) translate(512 512)">
+      <mask id="rb-28" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="216" fill="black"/></mask>
+      <mask id="rp-28" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="black" stroke-width="104" stroke-linecap="round"/></mask>
+      <path d="M -360 0 A 360 110 0 0 1 360 0" fill="none" stroke="url(#fg28)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" mask="url(#rb-28)"/>
+      <circle r="190" fill="url(#fg28)" mask="url(#rp-28)"/>
+      <path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="url(#fg28)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg29" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg29" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow29" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg29)"/><rect width="1024" height="1024" fill="url(#glow29)"/><g transform="rotate(-22 512 512) translate(512 512)">
+      <mask id="rb-29" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="216" fill="black"/></mask>
+      <mask id="rp-29" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="black" stroke-width="104" stroke-linecap="round"/></mask>
+      <path d="M -360 0 A 360 110 0 0 1 360 0" fill="none" stroke="url(#fg29)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" mask="url(#rb-29)"/>
+      <circle r="190" fill="url(#fg29)" mask="url(#rp-29)"/>
+      <path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="url(#fg29)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg30" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg30" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow30" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg30)"/><rect width="1024" height="1024" fill="url(#glow30)"/><g transform="rotate(-22 512 512) translate(512 512)">
+      <mask id="rb-30" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><circle r="216" fill="black"/></mask>
+      <mask id="rp-30" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="black" stroke-width="104" stroke-linecap="round"/></mask>
+      <path d="M -360 0 A 360 110 0 0 1 360 0" fill="none" stroke="url(#fg30)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" mask="url(#rb-30)"/>
+      <circle r="190" fill="url(#fg30)" mask="url(#rp-30)"/>
+      <path d="M -360 0 A 360 110 0 0 0 360 0" fill="none" stroke="url(#fg30)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div></div>
+  <div class="name"><b>9</b> Ringed planet</div><div class="note">A planet with a tight ring passing in front.</div></div>
+<div class="cell"><div class="big"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg31" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg31" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow31" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg31)"/><rect width="1024" height="1024" fill="url(#glow31)"/>
+    <g transform="rotate(-35 512 512)">
+      <mask id="ps-31" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><g fill="none" stroke="black" stroke-width="30" stroke-linecap="round"><path d="M 452 450 H 572"/><path d="M 452 512 H 572"/><path d="M 452 574 H 530"/></g></mask>
+      <rect x="402" y="372" width="220" height="280" rx="40" fill="url(#fg31)" mask="url(#ps-31)"/>
+      <g fill="url(#fg31)">
+        <rect x="290" y="496" width="120" height="32" rx="16"/><rect x="614" y="496" width="120" height="32" rx="16"/>
+        <rect x="170" y="392" width="128" height="240" rx="24"/><rect x="726" y="392" width="128" height="240" rx="24"/>
+      </g>
+    </g></svg></div>
+  <div class="row"><div class="small"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg32" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg32" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow32" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg32)"/><rect width="1024" height="1024" fill="url(#glow32)"/>
+    <g transform="rotate(-35 512 512)">
+      <mask id="ps-32" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><g fill="none" stroke="black" stroke-width="30" stroke-linecap="round"><path d="M 452 450 H 572"/><path d="M 452 512 H 572"/><path d="M 452 574 H 530"/></g></mask>
+      <rect x="402" y="372" width="220" height="280" rx="40" fill="url(#fg32)" mask="url(#ps-32)"/>
+      <g fill="url(#fg32)">
+        <rect x="290" y="496" width="120" height="32" rx="16"/><rect x="614" y="496" width="120" height="32" rx="16"/>
+        <rect x="170" y="392" width="128" height="240" rx="24"/><rect x="726" y="392" width="128" height="240" rx="24"/>
+      </g>
+    </g></svg></div><div class="small dim"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs><linearGradient id="bg33" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262D"/><stop offset="1" stop-color="#0C0D10"/></linearGradient>
+  <linearGradient id="fg33" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808"><stop offset="0" stop-color="#9CCBFF"/><stop offset="1" stop-color="#2F6BF0"/></linearGradient>
+  <radialGradient id="glow33" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#2F6BF0" stop-opacity="0.22"/><stop offset="1" stop-color="#2F6BF0" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1024" height="1024" fill="url(#bg33)"/><rect width="1024" height="1024" fill="url(#glow33)"/>
+    <g transform="rotate(-35 512 512)">
+      <mask id="ps-33" maskUnits="userSpaceOnUse" x="-1024" y="-1024" width="3072" height="3072"><rect x="-1024" y="-1024" width="3072" height="3072" fill="white"/><g fill="none" stroke="black" stroke-width="30" stroke-linecap="round"><path d="M 452 450 H 572"/><path d="M 452 512 H 572"/><path d="M 452 574 H 530"/></g></mask>
+      <rect x="402" y="372" width="220" height="280" rx="40" fill="url(#fg33)" mask="url(#ps-33)"/>
+      <g fill="url(#fg33)">
+        <rect x="290" y="496" width="120" height="32" rx="16"/><rect x="614" y="496" width="120" height="32" rx="16"/>
+        <rect x="170" y="392" width="128" height="240" rx="24"/><rect x="726" y="392" width="128" height="240" rx="24"/>
+      </g>
+    </g></svg></div></div>
+  <div class="name"><b>10</b> Page satellite</div><div class="note">A satellite whose body is a page of text.</div></div>
+</div></body></html>
