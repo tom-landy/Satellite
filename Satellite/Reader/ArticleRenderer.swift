@@ -30,7 +30,6 @@ enum ArticleRenderer {
     static let actionScheme = "satellite-action"
 
     static func html(for article: Article, style: ReaderStyle) -> String {
-        let source = article.source
         let body = clean(article.bodyHTML)
         var meta: [String] = []
         if !article.author.isEmpty { meta.append(article.author.escapedHTML) }
@@ -74,7 +73,6 @@ enum ArticleRenderer {
         <style>\(css(style))</style>
         </head><body>
         <header>
-          <div class="source">\((source?.title ?? "").escapedHTML)</div>
           <h1>\(titleHTML)</h1>
           <div class="meta">\(meta.joined(separator: " · "))</div>
         </header>
@@ -118,8 +116,6 @@ enum ArticleRenderer {
                padding: 20px max(22px, env(safe-area-inset-right)) 48px max(22px, env(safe-area-inset-left));
                overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
         header { margin-bottom: 1.4em; }
-        .source { font: -apple-system-footnote; font-family: -apple-system, system-ui; font-weight: 600; color: var(--accent);
-                  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5em; }
         h1 { font-size: 1.6em; line-height: 1.2; margin: 0 0 0.4em; font-weight: 700; -webkit-hyphens: manual; hyphens: manual; }
         h1 a { color: inherit; text-decoration: none; }
         .meta, .note { font: -apple-system-subheadline; font-family: -apple-system, system-ui; color: var(--secondary); }

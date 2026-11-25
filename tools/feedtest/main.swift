@@ -120,6 +120,8 @@ if let html = try? String(contentsOf: dir.appendingPathComponent("page.html"), e
     check(found.first?.title == "Example » Feed", "discovery title: \(found.first?.title ?? "")")
     check(found.last?.title == "Example & Site", "discovery falls back to page title: \(found.last?.title ?? "")")
 }
+check(FeedDiscovery.links(inHTML: "<title>Six Colors</title><link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"/feed\">",
+                          base: URL(string: "https://sixcolors.com/")!).first?.title == "Six Colors", "generic link title uses page title")
 check(FeedDiscovery.normalise("daringfireball.net")?.absoluteString == "https://daringfireball.net", "normalise bare host")
 check(FeedDiscovery.normalise("feed://example.com/rss")?.absoluteString == "https://example.com/rss", "normalise feed://")
 check(FeedDiscovery.normalise("not a url") == nil, "normalise rejects junk")

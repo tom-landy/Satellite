@@ -76,7 +76,10 @@ enum FeedDiscovery {
             guard rel.contains("alternate"), feedTypes.contains(type),
                   let href = attrs["href"]?.decodingHTMLEntities.trimmingCharacters(in: .whitespaces), !href.isEmpty,
                   let url = URL(string: href, relativeTo: base)?.absoluteURL else { continue }
-            let title = (attrs["title"]?.htmlInlineText).flatMap { $0.isEmpty ? nil : $0 } ?? fallbackTitle
+            // Many sites label the link just "RSS" or "Feed": the page's title says more.
+            let declaredTitle = attrs["title"]?.htmlInlineText ?? ""
+            let generic = ["", "rss", "atom", "feed", "rss feed", "atom feed", "json feed", "subscribe"]
+            let title = generic.contains(declaredTitle.lowercased()) ? fallbackTitle : declaredTitle
             // WordPress also lists a comments feed. Nobody wants that one.
             if url.path.contains("/comments/") || title.lowercased().contains("comments feed") { continue }
             if seen.insert(url).inserted {

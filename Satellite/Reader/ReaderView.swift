@@ -157,6 +157,7 @@ struct ArticleActionsBar: View {
             }
         }
         .padding(.horizontal, 14)
+        .frame(maxWidth: .infinity)
         .frame(height: 50)
         .overlay(alignment: .top) { Divider() }
     }
