@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0"><head><title>Subs</title></head><body>
+<outline text="Tech" title="Tech">
+<outline type="rss" text="A" title="A Blog" xmlUrl="https://a.example/feed" htmlUrl="https://a.example/"/>
+<outline type="rss" text="B" xmlURL="https://b.example/rss"/>
+</outline>
+<outline type="rss" text="A dup" xmlUrl="https://a.example/feed"/>
+</body></opml>

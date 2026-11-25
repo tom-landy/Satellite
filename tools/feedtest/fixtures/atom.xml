@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">Atom &amp;amp; Friends</title>
+  <link href="https://atom.example.org/feed.atom" rel="self"/>
+  <link href="https://atom.example.org/"/>
+  <icon>/favicon.png</icon>
+  <updated>2026-11-24T10:00:00Z</updated>
+  <entry>
+    <title>XHTML entry</title>
+    <link rel="alternate" type="text/html" href="https://atom.example.org/posts/xhtml"/>
+    <link rel="replies" href="https://atom.example.org/posts/xhtml#comments"/>
+    <id>tag:atom.example.org,2026:1</id>
+    <published>2026-11-24T08:15:30.123+01:00</published>
+    <updated>2026-11-24T09:00:00Z</updated>
+    <author><name>Alex Atom</name><uri>https://atom.example.org</uri></author>
+    <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><p>Para with <a href="/rel">relative link</a> and 3 &lt; 4.</p><img src="https://atom.example.org/pic.png" alt=""/><br/></div></content>
+  </entry>
+  <entry>
+    <title>Html entry</title>
+    <link href="https://atom.example.org/posts/html"/>
+    <id>tag:atom.example.org,2026:2</id>
+    <updated>2026-11-23T09:00:00Z</updated>
+    <summary type="html">&lt;p&gt;Summary only&lt;/p&gt;</summary>
+  </entry>
+</feed>

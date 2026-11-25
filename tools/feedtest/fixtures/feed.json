@@ -1,0 +1,11 @@
+{
+  "version": "https://jsonfeed.org/version/1.1",
+  "title": "JSON Feed Blog",
+  "home_page_url": "https://json.example.com/",
+  "icon": "https://json.example.com/icon.png",
+  "authors": [{"name": "Jo Json"}],
+  "items": [
+    {"id": 42, "url": "https://json.example.com/42", "title": "Numeric id", "content_html": "<p>Body <strong>html</strong></p>", "date_published": "2026-11-24T10:00:00-05:00"},
+    {"id": "t1", "url": "https://json.example.com/t1", "content_text": "Line one\n\nLine two & more", "date_published": "2026-11-23T10:00:00Z", "image": "https://json.example.com/t1.jpg"}
+  ]
+}

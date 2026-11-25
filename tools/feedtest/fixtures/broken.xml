@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<rss version="2.0"><channel><title>Broken</title><link>https://broken.example/</link>
+<item><title>Good item</title><link>https://broken.example/1</link><description>fine</description></item>
+<item><title>Bad item&nbsp;here</title><link>https://broken.example/2</link></item>
+</channel></rss>
