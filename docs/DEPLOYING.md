@@ -51,6 +51,7 @@ Change it before the first TestFlight upload if you want something else; it's fi
 | *No profiles for 'com.warhound.satellite' were found* / *Cloud signing permission error* | The API key needs **Admin** access (step 2). |
 | *No suitable application records were found* | The app record doesn't exist yet, or its bundle ID differs (step 1). |
 | *The bundle version must be higher than the previously uploaded version* | Run `tools/bump-version.sh`, commit, run again. |
+| *SDK version issue … must be built with the iOS 26 SDK* (or 27 from April 2027) | The workflow picks the newest Xcode on GitHub's `macos-26` machine; move `runs-on` to a newer image when Apple raises the minimum. |
 | Anything else | Copy the red lines from the failed step to me. |
 
 Privacy: the app ships a privacy manifest (`Satellite/PrivacyInfo.xcprivacy`) declaring no
