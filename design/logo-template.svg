@@ -4,7 +4,7 @@
       <stop offset="0" stop-color="#23262D"/>
       <stop offset="1" stop-color="#0C0D10"/>
     </linearGradient>
-    <linearGradient id="fg" gradientUnits="userSpaceOnUse" x1="0" y1="216" x2="0" y2="808">
+    <linearGradient id="fg" gradientUnits="userSpaceOnUse" x1="0" y1="133" x2="0" y2="891">
       <stop offset="0" stop-color="{{TOP}}"/>
       <stop offset="1" stop-color="{{BOTTOM}}"/>
     </linearGradient>
@@ -13,11 +13,16 @@
       <stop offset="1" stop-color="{{BOTTOM}}" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <g id="tile">
   <rect width="1024" height="1024" fill="url(#bg)"/>
   <rect width="1024" height="1024" fill="url(#glow)"/>
-  <!-- The dish: Orbit's ring (centre 512, r 250, stroke 92) with only the half opposite its gap,
-       an arm, and the feed dot exactly where Orbit's satellite sits (689, 335, r 58). -->
-  <path d="M 688.8 688.8 A 250 250 0 0 1 335.2 335.2" fill="none" stroke="url(#fg)" stroke-width="92" stroke-linecap="round"/>
-  <path d="M 512 512 L 650.6 373.4" fill="none" stroke="url(#fg)" stroke-width="44" stroke-linecap="round"/>
-  <circle cx="689" cy="335" r="58" fill="url(#fg)"/>
+  </g>
+  <!-- The dish: half of Orbit's ring (the half opposite its gap) with the feed where Orbit's satellite
+       sits, sized to the Warhound brief: span 74% (758 px), strokes 103 px (10%), knob 130 px across,
+       centred on the canvas. Dish centre (560.3, 463.7), radius 375.8; feed at -45 degrees. -->
+  <g id="mark">
+  <path d="M 826.0 729.4 A 375.8 375.8 0 0 1 294.6 198.0" fill="none" stroke="url(#fg)" stroke-width="103" stroke-linecap="round"/>
+  <path d="M 560.3 463.7 L 826.0 198.0" fill="none" stroke="url(#fg)" stroke-width="103" stroke-linecap="round"/>
+  <circle cx="826.0" cy="198.0" r="65" fill="url(#fg)"/>
+  </g>
 </svg>

@@ -146,9 +146,14 @@ struct LogoView: View {
                     RadialGradient(colors: [theme.bottom.opacity(0.22), .clear], center: .center,
                                    startRadius: 0, endRadius: 512 * s)
                 }
-                // Filled one part at a time, so where the arm meets the dot never cancels out.
-                ForEach(Array(Self.parts(scale: s).enumerated()), id: \.offset) { _, part in
-                    part.fill(theme.gradient)
+                // One gradient across the whole mark, cut to its shape. The parts are drawn one at a
+                // time so where the arm meets the dot never cancels out.
+                theme.gradient.mask {
+                    ZStack {
+                        ForEach(Array(Self.parts(scale: s).enumerated()), id: \.offset) { _, part in
+                            part.fill(.black)
+                        }
+                    }
                 }
             }
         }
@@ -156,13 +161,15 @@ struct LogoView: View {
         .accessibilityHidden(true)
     }
 
-    /// Half of Orbit's ring (centre 512, radius 250) from 45° to 225°, an arm towards -45°,
-    /// and the feed dot at (689, 335), radius 58: the same spot as Orbit's satellite.
+    /// Half of Orbit's ring as a dish, an arm, and the feed dot at -45°, sized to the Warhound
+    /// brief: spans 74% of the tile, strokes 103 (10%), feed 130 across, centred. Matches
+    /// design/logo-template.svg.
     static func parts(scale s: CGFloat) -> [Path] {
-        let c = 512.0, r = 250.0
+        let cx = 560.3, cy = 463.7, r = 375.8
+        let stroke = 103.0, feed = 65.0
         func point(_ radius: Double, _ degrees: Double) -> CGPoint {
             let a = degrees * .pi / 180
-            return CGPoint(x: (c + radius * cos(a)) * s, y: (c + radius * sin(a)) * s)
+            return CGPoint(x: (cx + radius * cos(a)) * s, y: (cy + radius * sin(a)) * s)
         }
         var dish = Path()
         let steps = 90
@@ -172,11 +179,12 @@ struct LogoView: View {
         }
         var arm = Path()
         arm.move(to: point(0, 0))
-        arm.addLine(to: point(196, -45))
+        arm.addLine(to: point(r, -45))
         return [
-            dish.strokedPath(StrokeStyle(lineWidth: 92 * s, lineCap: .round, lineJoin: .round)),
-            arm.strokedPath(StrokeStyle(lineWidth: 44 * s, lineCap: .round)),
-            Path(ellipseIn: CGRect(x: (689 - 58) * s, y: (335 - 58) * s, width: 116 * s, height: 116 * s)),
+            dish.strokedPath(StrokeStyle(lineWidth: stroke * s, lineCap: .round, lineJoin: .round)),
+            arm.strokedPath(StrokeStyle(lineWidth: stroke * s, lineCap: .round)),
+            Path(ellipseIn: CGRect(x: point(r, -45).x - feed * s, y: point(r, -45).y - feed * s,
+                                   width: feed * 2 * s, height: feed * 2 * s)),
         ]
     }
 }
