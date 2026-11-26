@@ -54,19 +54,35 @@ struct ReaderView: View {
         HStack(spacing: 0) {
             BarButton(symbol: "gearshape", label: "Settings") { sheet = .settings }
             Spacer(minLength: 8)
-            VStack(spacing: 1) {
-                Text(queue.current?.source?.title ?? "Satellite")
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(theme.color)
-                    .lineLimit(1)
-                Text(position)
+            // Tap the title to switch between Today, Yesterday and This Week.
+            Menu {
+                Picker("Show", selection: Binding(get: { queue.scope }, set: { queue.setScope($0, context) })) {
+                    ForEach(ReaderScope.allCases) { scope in
+                        Text(scope.name).tag(scope)
+                    }
+                }
+            } label: {
+                VStack(spacing: 1) {
+                    Text(queue.current?.source?.title ?? "Satellite")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(theme.color)
+                        .lineLimit(1)
+                    HStack(spacing: 3) {
+                        Text(position)
+                            .contentTransition(.numericText())
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 8, weight: .bold))
+                    }
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(.secondary)
-                    .contentTransition(.numericText())
+                }
+                .padding(.horizontal, 8)
+                .contentShape(Rectangle())
             }
+            .accessibilityLabel("\(queue.scope.name), \(position). Choose what to show")
             .animation(.snappy, value: queue.index)
             Spacer(minLength: 8)
-            BarButton(symbol: "list.bullet", label: "All Unread Articles") { sheet = .articles }
+            BarButton(symbol: "list.bullet", label: "Article List") { sheet = .articles }
         }
         .padding(.horizontal, 6)
         .frame(height: 48)
@@ -75,10 +91,11 @@ struct ReaderView: View {
         }
     }
 
+    /// "Today · 3 to go": unread articles after this one, so 0 means this is the last.
     private var position: String {
         if queue.isRefreshing && queue.isAtEnd { return "Checking for new articles…" }
-        if queue.isAtEnd { return "All caught up" }
-        return "\(queue.remaining) left"
+        if queue.isAtEnd { return "\(queue.scope.name) · all caught up" }
+        return "\(queue.scope.name) · \(queue.toGo) to go"
     }
 }
 
@@ -181,10 +198,10 @@ struct CaughtUpView: View {
             Text("All Caught Up")
                 .font(.title2.bold())
             Group {
-                if queue.readThisRun == 0 {
-                    Text("Nothing new from your ^[\(sourceCount) source](inflect: true) in the last \(ReadingQueue.windowDays) days.")
+                if queue.entries.isEmpty {
+                    Text("Nothing \(queue.scope.phrase) from your ^[\(sourceCount) source](inflect: true).")
                 } else {
-                    Text("That's everything new from your ^[\(sourceCount) source](inflect: true).")
+                    Text("That's everything \(queue.scope.phrase). Swipe back to reread.")
                 }
             }
             .font(.callout)
@@ -208,6 +225,14 @@ struct CaughtUpView: View {
             .buttonStyle(.bordered)
             .disabled(queue.isRefreshing)
             .padding(.top, 4)
+            // Unread articles waiting in the other views.
+            ForEach(ReaderScope.allCases.filter { $0 != queue.scope }) { other in
+                let count = queue.unreadCount(in: other, context)
+                if count > 0 {
+                    Button("\(other.name): \(count) unread") { queue.setScope(other, context) }
+                        .font(.callout)
+                }
+            }
             Spacer()
             Spacer()
         }

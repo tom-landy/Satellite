@@ -1,7 +1,8 @@
 import SwiftData
 import SwiftUI
 
-/// Every unread article on one line each. Tap to read it, swipe to mark it read.
+/// Every article in the reader's view (Today, Yesterday or This Week) on one line each, unread in
+/// full colour and read ones dimmed. Tap to read it, swipe to mark it read or unread, or save it.
 /// Opened from the list button in the reader.
 struct ArticleListView: View {
     @Environment(ReadingQueue.self) private var queue
@@ -13,10 +14,18 @@ struct ArticleListView: View {
 
     var body: some View {
         NavigationStack {
-            Group {
-                if queue.remaining == 0 {
-                    ContentUnavailableView("All Caught Up", systemImage: "checkmark.circle",
-                                           description: Text("Nothing unread from the last \(ReadingQueue.windowDays) days."))
+            VStack(spacing: 0) {
+                Picker("Show", selection: Binding(get: { queue.scope }, set: { queue.setScope($0, context) })) {
+                    ForEach(ReaderScope.allCases) { Text($0.name).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+
+                if queue.entries.isEmpty {
+                    ContentUnavailableView("Nothing Here", systemImage: "tray",
+                                           description: Text("No articles \(queue.scope.phrase)."))
+                        .frame(maxHeight: .infinity)
                 } else {
                     List {
                         ForEach(Array(queue.entries.enumerated()), id: \.element.key) { i, entry in
@@ -29,12 +38,11 @@ struct ArticleListView: View {
                                 }
                                 .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                                 .swipeActions(edge: .leading) {
-                                    if i != queue.index {
-                                        Button { withAnimation { queue.markRead(at: i) } } label: {
-                                            Label("Read", systemImage: "checkmark")
-                                        }
-                                        .tint(theme.color)
+                                    Button { queue.toggleRead(at: i) } label: {
+                                        Label(entry.article.isRead ? "Unread" : "Read",
+                                              systemImage: entry.article.isRead ? "circle.inset.filled" : "checkmark")
                                     }
+                                    .tint(theme.color)
                                 }
                                 .swipeActions(edge: .trailing) {
                                     Button { queue.toggleSaved(entry.article) } label: {
@@ -48,11 +56,11 @@ struct ArticleListView: View {
                     }
                     .listStyle(.plain)
                     .environment(\.defaultMinListRowHeight, 44)
+                    .refreshable { await queue.refresh(context) }
                 }
             }
-            .navigationTitle(queue.remaining == 0 ? "Unread" : "\(queue.remaining) Unread")
+            .navigationTitle(queue.unreadCount == 0 ? queue.scope.name : "\(queue.scope.name) · \(queue.unreadCount) Unread")
             .navigationBarTitleDisplayMode(.inline)
-            .refreshable { await queue.refresh(context) }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Sources") { showsSources = true }
@@ -62,7 +70,7 @@ struct ArticleListView: View {
                 }
                 ToolbarItem(placement: .bottomBar) {
                     Button("Mark All as Read") { confirmAll = true }
-                        .disabled(queue.remaining == 0)
+                        .disabled(queue.unreadCount == 0)
                 }
             }
             .confirmationDialog("Mark everything as read?", isPresented: $confirmAll, titleVisibility: .visible) {
@@ -71,7 +79,7 @@ struct ArticleListView: View {
                     dismiss()
                 }
             } message: {
-                Text("Every unread article disappears. Saved articles stay in Saved.")
+                Text("Every unread article is marked read, in every view. You can still swipe back to them.")
             }
             .sheet(isPresented: $showsSources) { SourcesView() }
         }
@@ -87,9 +95,10 @@ struct ArticleLine: View {
     var body: some View {
         HStack(spacing: 10) {
             SourceIcon(source: article.source, size: 20)
+                .opacity(article.isRead && !isCurrent ? 0.5 : 1)
             Text(article.title)
                 .font(.subheadline.weight(isCurrent ? .semibold : .regular))
-                .foregroundStyle(isCurrent ? theme.color : .primary)
+                .foregroundStyle(isCurrent ? theme.color : (article.isRead ? .secondary : .primary))
                 .lineLimit(1)
             Spacer(minLength: 6)
             if article.isSaved {

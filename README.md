@@ -6,12 +6,12 @@ Screenshots appear in `docs/screenshots` after running Actions → iOS build →
 
 ## What it does
 
-- One screen. The newest unread article fills it; swipe left for the next. An article is marked
-  read when it's shown and disappears once you swipe past it, unless you mark it unread.
-- The list button shows every unread article on one line each: tap to jump to it, swipe to mark
-  it read or save it. Mark All as Read is there and in Settings.
-- Only the last 7 days count as unread (3, 7, 14 or 30 in Settings). Older articles drop out
-  without being marked read, so time away never leaves a pile.
+- One screen. Swipe left for the next article, right to go back. The reader shows Today,
+  Yesterday or This Week (the last 7 days): tap the title in the top bar to switch. Each view
+  holds every article from that period, newest first, read or not, and opens at the first unread
+  one. "3 to go" counts the unread articles after the one on screen.
+- The list button shows the same view one line per article (read ones dimmed): tap to jump,
+  swipe to mark read or unread, or save. Mark All as Read is there and in Settings.
 - New articles found while you read go straight after the one on screen. Back after half an
   hour or more, you start a fresh run.
 - Add a site by pasting its address: Satellite finds the feed (RSS, Atom, RSS 1.0 or JSON Feed).

@@ -7,7 +7,6 @@ struct SettingsView: View {
     @AppStorage(AppAppearance.storageKey) private var appearance: AppAppearance = .system
     @AppStorage(Typeface.storageKey) private var typeface: Typeface = .system
     @AppStorage(ReaderStyle.scaleKey) private var textScale = 1.0
-    @AppStorage(ReadingQueue.windowKey) private var windowDays = 7
     @Environment(ReadingQueue.self) private var queue
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -75,14 +74,6 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    Picker("Unread Articles From", selection: $windowDays) {
-                        ForEach([3, 7, 14, 30], id: \.self) { Text("Last \($0) days").tag($0) }
-                    }
-                } footer: {
-                    Text("Older articles drop out of the reader without being marked read, so time away never leaves a pile.")
-                }
-
-                Section {
                     Button("Mark All as Read") { confirmMarkAll = true }
                         .disabled(unread.isEmpty)
                         .confirmationDialog("Mark ^[\(unread.count) article](inflect: true) as read?",
@@ -92,7 +83,7 @@ struct SettingsView: View {
                             Text("Every unread article disappears from the reader. Saved articles stay in Saved.")
                         }
                 } footer: {
-                    Text("Read articles disappear as you swipe past them. Mark one unread to keep it.")
+                    Text("Marks every unread article read, in Today, Yesterday and This Week and older.")
                 }
 
                 Section("About") {
@@ -110,7 +101,6 @@ struct SettingsView: View {
             }
             .onChange(of: theme) { _, new in new.applyIcon(matchIcon) }
             .onChange(of: matchIcon) { _, new in theme.applyIcon(new) }
-            .onChange(of: windowDays) { queue.rebuild(context) }
         }
     }
 

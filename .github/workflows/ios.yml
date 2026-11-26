@@ -103,6 +103,7 @@ jobs:
           NAME=9-add shoot -demoSheet addSource -appearance dark
           NAME=10-list shoot -demoSheet articles -appearance dark
           NAME=11-list-light shoot -demoSheet articles -appearance light -accentTheme orange
+          NAME=12-yesterday shoot -demoScope yesterday -demoIndex 1 -appearance dark
           xcrun simctl terminate "$UDID" com.warhound.satellite || true
           xcrun simctl launch "$UDID" com.warhound.satellite -appearanceChosen YES
           sleep 5

@@ -10,14 +10,51 @@ struct ReaderEntry: Identifiable {
     var id: String { key }
 }
 
-/// The reader's run of articles: every unread article from the last few days, newest first,
-/// swiped through one at a time. An article is marked read when it's shown and leaves the run
-/// when you move on from it, unless you marked it unread again. New articles found by a refresh
-/// go straight after the current one.
+/// Which articles the reader swipes through.
+enum ReaderScope: String, CaseIterable, Identifiable {
+    case today, yesterday, week
+
+    static let storageKey = "readerScope"
+    var id: String { rawValue }
+
+    var name: String {
+        switch self {
+        case .today: "Today"
+        case .yesterday: "Yesterday"
+        case .week: "This Week"
+        }
+    }
+
+    /// "from today", for sentences.
+    var phrase: String {
+        switch self {
+        case .today: "from today"
+        case .yesterday: "from yesterday"
+        case .week: "from the last 7 days"
+        }
+    }
+
+    /// Start (inclusive) and end (exclusive). This Week is the last 7 days including today,
+    /// so it's never nearly empty on a Monday morning.
+    var range: (start: Date, end: Date) {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        let farFuture = Date.distantFuture
+        switch self {
+        case .today: return (today, farFuture)
+        case .yesterday: return (calendar.date(byAdding: .day, value: -1, to: today)!, today)
+        case .week: return (calendar.date(byAdding: .day, value: -6, to: today)!, farFuture)
+        }
+    }
+}
+
+/// The reader's run of articles: everything from today, yesterday or the last 7 days, newest
+/// first, read or not, swiped through one at a time. It opens at the first unread article, marks
+/// articles read as they're shown, and keeps them in place so swiping back always works. New
+/// articles found by a refresh go straight after the current one.
 @MainActor
 @Observable
 final class ReadingQueue {
-    static let windowKey = "unreadWindowDays"
     static let lastRefreshKey = "lastRefreshAll"
 
     private(set) var entries: [ReaderEntry] = []
@@ -26,16 +63,9 @@ final class ReadingQueue {
     private(set) var revision = 0
     private(set) var loadingFullText: Set<String> = []
     private(set) var isRefreshing = false
-    /// Articles read and gone since the run started, for the progress line.
-    private(set) var readThisRun = 0
+    private(set) var scope: ReaderScope =
+        ReaderScope(rawValue: UserDefaults.standard.string(forKey: ReaderScope.storageKey) ?? "") ?? .today
     var message: String?
-
-    /// How far back unread articles count. Older ones drop out without being marked read,
-    /// so a few days away never leaves a pile.
-    static var windowDays: Int {
-        let days = UserDefaults.standard.integer(forKey: windowKey)
-        return days > 0 ? days : 7
-    }
 
     static var lastRefresh: Date? {
         let t = UserDefaults.standard.double(forKey: lastRefreshKey)
@@ -50,44 +80,69 @@ final class ReadingQueue {
 
     var isAtEnd: Bool { index >= entries.count }
 
-    /// Unread articles left, counting the one on screen.
-    var remaining: Int { max(0, entries.count - index) }
+    /// Unread articles after the one on screen: what's still to come.
+    var toGo: Int {
+        guard index + 1 < entries.count else { return 0 }
+        return entries[(index + 1)...].filter { $0.article.isAlive && $0.article.readAt == nil }.count
+    }
 
+    /// Unread articles anywhere in the run, including before the current one.
+    var unreadCount: Int {
+        entries.filter { $0.article.isAlive && $0.article.readAt == nil }.count
+    }
+
+    /// Share of the run that's read, for the progress line.
     var progress: Double {
-        let total = readThisRun + entries.count
-        return total == 0 ? 1 : Double(readThisRun + min(index, entries.count)) / Double(total)
+        guard !entries.isEmpty else { return 1 }
+        return Double(entries.count - unreadCount) / Double(entries.count)
     }
 
     // MARK: - Building the run
 
-    private func unread(_ context: ModelContext) -> [Article] {
-        let cutoff = Date.now.addingTimeInterval(-Double(Self.windowDays) * 86400)
+    private func articles(in scope: ReaderScope, _ context: ModelContext) -> [Article] {
+        let (start, end) = scope.range
         let descriptor = FetchDescriptor<Article>(
-            predicate: #Predicate { $0.readAt == nil && $0.date > cutoff },
+            predicate: #Predicate { $0.date >= start && $0.date < end },
             sortBy: [SortDescriptor(\.date, order: .reverse)])
         return (try? context.fetch(descriptor)) ?? []
     }
 
-    /// Starts a fresh run of unread articles. The article on screen stays first, so a rebuild
-    /// never pulls the page out from under you.
-    func rebuild(_ context: ModelContext) {
-        var articles = unread(context)
-        if let current {
-            articles.removeAll { $0.key == current.key }
-            articles.insert(current, at: 0)
-        }
+    /// Unread articles in another view, for the caught-up page's suggestions.
+    func unreadCount(in scope: ReaderScope, _ context: ModelContext) -> Int {
+        let (start, end) = scope.range
+        let descriptor = FetchDescriptor<Article>(
+            predicate: #Predicate { $0.readAt == nil && $0.date >= start && $0.date < end })
+        return (try? context.fetchCount(descriptor)) ?? 0
+    }
+
+    /// Loads the run afresh and opens it at the first unread article (the caught-up page if
+    /// there isn't one). With `keepPlace`, the article on screen stays on screen if it's still
+    /// in the run, so a rebuild never pulls the page out from under you.
+    func rebuild(_ context: ModelContext, keepPlace: Bool = true) {
+        let currentKey = keepPlace ? current?.key : nil
+        let articles = articles(in: scope, context)
         entries = articles.map { ReaderEntry(key: $0.key, article: $0) }
-        index = 0
-        readThisRun = 0
+        if let currentKey, let i = entries.firstIndex(where: { $0.key == currentKey }) {
+            index = i
+        } else {
+            index = entries.firstIndex { $0.article.readAt == nil } ?? entries.count
+        }
         revision += 1
         markCurrentRead()
     }
 
-    /// Adds unread articles that aren't in the run yet, straight after the current one.
+    func setScope(_ newScope: ReaderScope, _ context: ModelContext) {
+        guard newScope != scope else { return }
+        scope = newScope
+        UserDefaults.standard.set(newScope.rawValue, forKey: ReaderScope.storageKey)
+        rebuild(context, keepPlace: false)
+    }
+
+    /// Adds articles that aren't in the run yet, straight after the current one.
     func addNew(_ context: ModelContext) {
         dropDeleted()
         let known = Set(entries.map(\.key))
-        let fresh = unread(context).filter { !known.contains($0.key) }
+        let fresh = articles(in: scope, context).filter { !known.contains($0.key) }
         guard !fresh.isEmpty else { return }
         let wasAtEnd = isAtEnd
         let position = wasAtEnd ? entries.count : index + 1
@@ -112,38 +167,23 @@ final class ReadingQueue {
     // MARK: - Moving
 
     /// Called by the pager when a swipe lands on a page.
-    func show(_ newIndex: Int) { move(to: newIndex) }
+    func show(_ newIndex: Int) { jump(to: newIndex) }
 
-    /// Jumps straight to an article, from the list.
-    func jump(to newIndex: Int) { move(to: newIndex) }
-
-    /// Moves to another page. The article being left goes from the run if it's read.
-    private func move(to newIndex: Int) {
-        var target = min(max(0, newIndex), entries.count)
+    /// Goes straight to a page, from a swipe or the list.
+    func jump(to newIndex: Int) {
+        let target = min(max(0, newIndex), entries.count)
         guard target != index else { return }
-        if entries.indices.contains(index) {
-            let leaving = entries[index].article
-            if !leaving.isAlive || leaving.readAt != nil {
-                entries.remove(at: index)
-                if leaving.isAlive { readThisRun += 1 }
-                if target > index { target -= 1 }
-            }
-        }
-        index = min(target, entries.count)
+        index = target
         markCurrentRead()
     }
 
-    /// Marks an article other than the current one read, from the list. It goes at once.
-    func markRead(at i: Int) {
-        guard entries.indices.contains(i), i != index else { return }
-        let article = entries[i].article
-        if article.isAlive { article.readAt = .now }
-        entries.remove(at: i)
-        readThisRun += 1
-        if i < index { index -= 1 }
+    /// Marks an article read or unread from the list.
+    func toggleRead(at i: Int) {
+        guard entries.indices.contains(i), entries[i].article.isAlive else { return }
+        toggleRead(entries[i].article)
     }
 
-    /// Marks every unread article read, including ones older than the unread window.
+    /// Marks every unread article read, in every view. The run stays, so you can still swipe back.
     func markAllRead(_ context: ModelContext) {
         let descriptor = FetchDescriptor<Article>(predicate: #Predicate { $0.readAt == nil })
         let now = Date.now
@@ -151,9 +191,7 @@ final class ReadingQueue {
             article.readAt = now
         }
         try? context.save()
-        readThisRun += entries.count
-        entries = []
-        index = 0
+        index = entries.count
         revision += 1
     }
 

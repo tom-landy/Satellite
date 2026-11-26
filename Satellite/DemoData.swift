@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 /// Sample sources and articles for screenshots and trying the app without a network.
-/// Launch with -demo. Also: -demoSheet articles|sources|settings|addSource, -demoIndex 2, -demoWelcome YES, -demoEnd YES.
+/// Launch with -demo. Also: -demoSheet articles|sources|settings|addSource, -demoIndex 2, -demoWelcome YES, -demoEnd YES, -demoScope today|yesterday|week.
 @MainActor
 enum DemoData {
     nonisolated static var isActive: Bool { ProcessInfo.processInfo.arguments.contains("-demo") }
@@ -99,12 +99,14 @@ enum DemoData {
 
     /// Puts the app in the state a screenshot asks for. Returns the sheet to show, if any.
     static func apply(queue: ReadingQueue, context: ModelContext) -> ReaderSheet? {
-        queue.rebuild(context)
         let defaults = UserDefaults.standard
+        // The samples span two days, so show This Week unless a screenshot asks for another view.
+        let scope = defaults.string(forKey: "demoScope").flatMap(ReaderScope.init(rawValue:)) ?? .week
+        if queue.scope == scope { queue.rebuild(context, keepPlace: false) } else { queue.setScope(scope, context) }
         if defaults.bool(forKey: "demoEnd") {
-            queue.show(queue.entries.count)
+            queue.jump(to: queue.entries.count)
         } else if defaults.integer(forKey: "demoIndex") > 0 {
-            queue.show(defaults.integer(forKey: "demoIndex"))
+            queue.jump(to: defaults.integer(forKey: "demoIndex"))
         }
         return defaults.string(forKey: "demoSheet").flatMap(ReaderSheet.init(rawValue:))
     }
